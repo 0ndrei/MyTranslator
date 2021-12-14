@@ -29,4 +29,9 @@ public class WordTranslatorController {
     public boolean addDefinitionForWord(@PathVariable String word, @PathVariable String language, @RequestBody Definition definition){
         return wordTranslatorRepository.addDefinitionForWord(word, language, definition);
     }
+
+    @DeleteMapping(path = "translate/word/{language}/{word}")
+    public boolean deleteDefinition(@PathVariable String word, @PathVariable String language, @PathVariable Definition definition){
+        return wordTranslatorRepository.deleteDefinition(word, language, definition);
+    }
 }
