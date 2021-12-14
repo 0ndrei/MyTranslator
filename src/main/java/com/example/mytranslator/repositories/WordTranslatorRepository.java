@@ -54,7 +54,7 @@ public class WordTranslatorRepository {
             Reader reader = Files.newBufferedReader(Paths.get(fileName));
             Word wordModel = gson.fromJson(reader, Word.class);
             reader.close();
-            wordModel.definitions.add(definition);//todo
+            wordModel.definitions.add(definition);
             try {
                 Writer writer = new FileWriter(fileName);
                 gson.toJson(wordModel, writer);
