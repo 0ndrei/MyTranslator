@@ -31,7 +31,12 @@ public class WordTranslatorController {
     }
 
     @DeleteMapping(path = "translate/word/{language}/{word}/definitions")
-    public boolean deleteDefinition(@PathVariable String word, @PathVariable String language,@RequestBody String dictionary) {
-        return wordTranslatorRepository.deleteDefinition(word, language, dictionary);
+    public boolean deleteDefinition(@PathVariable String word, @PathVariable String language,@RequestBody String definition) {
+        return wordTranslatorRepository.deleteDefinition(word, language, definition);
     }
+
+   /*@GetMapping(path = "translate/word/{language}/{word}")
+    public String DefinitionsForWord(@PathVariable String word, @PathVariable String language){
+        return wordTranslatorRepository.DefinitionsForWord(word, language);
+    }*/
 }
