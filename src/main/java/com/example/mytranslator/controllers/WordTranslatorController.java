@@ -32,6 +32,6 @@ public class WordTranslatorController {
 
     @DeleteMapping(path = "translate/word/{language}/{word}/definitions")
     public boolean deleteDefinition(@PathVariable String word, @PathVariable String language,@RequestBody String dictionary) {
-        return wordTranslatorRepository.deleteDefinition(word, language,dictionary);
+        return wordTranslatorRepository.deleteDefinition(word, language, dictionary);
     }
 }
