@@ -3,6 +3,7 @@ package com.example.mytranslator.repositories;
 import com.example.mytranslator.models.Definition;
 import com.example.mytranslator.models.Word;
 import com.google.gson.Gson;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -69,23 +70,44 @@ public class WordTranslatorRepository {
         }
     }
 
-    public boolean deleteDefinition(String word, String language, String definition) {
-        String fileName = "src/main/resources/translations/" + language + "/" + word + ".json";
+    public boolean deleteDefinition(String word, String language, String dictionary){
+        String fileName = "src/main/resources/translations/" +  language + "/"  + word + ".json";
         try {
             Reader reader = Files.newBufferedReader(Paths.get(fileName));
             Word wordModel = gson.fromJson(reader, Word.class);
             reader.close();
-            wordModel.definitions.remove(definition);
+            wordModel.definitions.remove(dictionary);
             try {
                 Writer writer = new FileWriter(fileName);
                 gson.toJson(wordModel, writer);
                 writer.close();
-            } catch (Exception e) {
+            } catch (Exception e){
                 return false;
             }
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public String getDefinitions(@PathVariable String word, String language){
+        String FileName = "src/main/resources/translations/" +  language + "/"  + word + ".json";
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get(FileName));
+            Word wordModel = gson.fromJson(reader, Word.class);
+            reader.close();
+            try {
+                for(Object  definition : wordModel.definitions) {
+                    return  definition.toString();
+                }
+                return "Success";
+            }
+            catch (Exception e) {
+                return "Not successful";
+            }
+        }
+        catch (Exception e) {
+            return "Not successful";
         }
     }
 }
